@@ -2,6 +2,8 @@ import axios from 'axios';
 import { notFound } from 'next/navigation';
 import UpdateSalaryForm from '@/components/UpdateSalaryForm';
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type Cat = {
   id: string;
   name: string;
@@ -16,7 +18,7 @@ type Props = {
 
 const getCat = async (id: string): Promise<Cat | null> => {
   try {
-    const res = await axios.get(`http://127.0.0.1:8001/cats/${id}`);
+    const res = await axios.get(`${API_URL}cats/${id}`);
     return res.data;
   } catch (error) {
     return null;

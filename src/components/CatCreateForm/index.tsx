@@ -5,6 +5,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import {Breed, CatCreateData} from "@/types"
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const CatCreateForm: React.FC = () => {
   const router = useRouter();
   const [breeds, setBreeds] = useState<Breed[]>([]);
@@ -61,7 +63,7 @@ const CatCreateForm: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8001/cats/create/",
+        `${API_URL}cats/create/`,
         formData
       );
       const newCat = response.data;

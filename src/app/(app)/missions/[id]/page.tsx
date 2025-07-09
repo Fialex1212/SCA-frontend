@@ -2,6 +2,8 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 import MissionDetails from "../../../../components/MissionDetail";
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type Target = {
   id: string;
   name: string;
@@ -26,7 +28,7 @@ type Props = {
 
 const getMission = async (id: string): Promise<Mission | null> => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8001/missions/${id}`);
+    const response = await axios.get(`${API_URL}missions/${id}`);
     return response.data;
   } catch {
     return null;

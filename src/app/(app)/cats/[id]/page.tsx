@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import CatDetails from "@/components/CatDetails";
 import { Cat } from "@/types";
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type Props = {
   params: {
     id: string;
@@ -11,7 +13,7 @@ type Props = {
 
 const getCat = async (id: string): Promise<Cat | null> => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8001/cats/${id}`);
+    const response = await axios.get(`${API_URL}cats/${id}`);
     return response.data;
   } catch {
     return null;

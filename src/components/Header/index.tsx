@@ -6,8 +6,6 @@ const Header = () => {
   const headerItems = [
     { name: "Cats", slug: "/cats" },
     { name: "Missions", slug: "/missions" },
-    { name: "New Cat", slug: "/cats/new" },
-    { name: "New Mission", slug: "/missions/new" },
   ];
 
   return (

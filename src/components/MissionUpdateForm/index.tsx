@@ -5,6 +5,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type TargetInput = {
   id?: string;
   name: string;
@@ -43,7 +45,7 @@ export default function MissionUpdateForm({ missionId }: Props) {
     async function fetchMission() {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8001/missions/${missionId}`
+          `${API_URL}missions/${missionId}`
         );
         const mission = res.data;
 
@@ -80,7 +82,7 @@ export default function MissionUpdateForm({ missionId }: Props) {
     try {
       setLoading(true);
       setError("");
-      await axios.put(`http://127.0.0.1:8001/missions/${missionId}`, data);
+      await axios.put(`${API_URL}missions/${missionId}`, data);
       router.push(`/missions/${missionId}`);
     } catch (err) {
       setError("Failed to update mission. Check your input.");

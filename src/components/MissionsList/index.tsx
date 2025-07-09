@@ -12,30 +12,32 @@ const MissionsList: React.FC = () => {
     fetchMissions();
   }, [fetchMissions]);
 
-  if (loading)
-    return (
-      <div className="container mx-auto p-4">
+  let content;
+
+  if (loading) {
+    content = (
+      <div className="container mx-auto h-[200px] p-4 flex justify-center items-center">
         <p>Loading missions...</p>
       </div>
     );
-
-  if (error)
-    return (
-      <div className="container mx-auto p-4">
-        <p className="text-red-500">Error: {error}</p>
+  } else if (error) {
+    content = (
+      <div className="container mx-auto h-[200px] p-4 flex justify-center items-center">
+        <p className="text-red-500 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center animate-pulse">
+          Error: {error}
+        </p>
       </div>
     );
-
-  if (missions.length === 0) {
-    return (
-      <div className="container mx-auto p-4">
-        <p className="text-gray-500">No missions found.</p>
+  } else if (missions.length === 0) {
+    content = (
+      <div className="container mx-auto h-[200px] p-4 flex justify-center items-center">
+        <p className="text-red-500 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center animate-pulse">
+          No missions found.
+        </p>
       </div>
     );
-  }
-
-  return (
-    <div className="container mx-auto p-4">
+  } else {
+    content = (
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {missions.map((mission) => (
           <li key={mission.id}>
@@ -45,6 +47,21 @@ const MissionsList: React.FC = () => {
           </li>
         ))}
       </ul>
+    );
+  }
+
+  return (
+    <div className="container mx-auto p-4">
+      {content}
+
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/missions/new"
+          className="inline-block px-6 py-3 bg-green-500 text-white rounded shadow hover:bg-green-400 transition"
+        >
+          Add New Mission
+        </Link>
+      </div>
     </div>
   );
 };

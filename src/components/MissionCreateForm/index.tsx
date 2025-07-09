@@ -5,6 +5,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type TargetInput = {
   name: string;
   country: string;
@@ -38,7 +40,7 @@ export default function MissionCreateForm() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://127.0.0.1:8001/missions/create/",
+        `${API_URL}missions/create/`,
         data
       );
       const mission = response.data;

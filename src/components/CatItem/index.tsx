@@ -10,7 +10,7 @@ const CatItem: React.FC<CatItemProps> = ({ cat }) => {
     <div className="p-4 rounded-xl shadow-md bg-white border">
       <h2 className="text-xl font-bold text-gray-800">{cat.name}</h2>
       <p className="text-gray-600">Breed: {cat.breed}</p>
-      <p className="text-gray-600">Salary: ${cat.salary}</p>
+      <p className="text-gray-600 mb-[20px]">Salary: ${cat.salary}</p>
       <p className="text-xs text-gray-400">ID: {cat.id}</p>
     </div>
   );

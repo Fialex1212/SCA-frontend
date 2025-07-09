@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 type Props = {
   catId: string;
   currentSalary: number;
@@ -11,7 +13,7 @@ type Props = {
 
 const UpdateSalaryForm = ({ catId, currentSalary }: Props) => {
   const router = useRouter();
-  const [salary, setSalary] = useState(currentSalary);
+  const [salary, setSalary] = useState<string | number>(currentSalary);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -23,8 +25,8 @@ const UpdateSalaryForm = ({ catId, currentSalary }: Props) => {
     setSuccess(false);
 
     try {
-      await axios.put(`http://127.0.0.1:8001/cats/${catId}`, {
-        salary,
+      await axios.put(`${API_URL}cats/${catId}`, {
+        salary: Number(salary),
       });
       setSuccess(true);
       router.push(`/cats/${catId}`);
@@ -51,7 +53,7 @@ const UpdateSalaryForm = ({ catId, currentSalary }: Props) => {
           id="salary"
           type="number"
           value={salary}
-          onChange={(e) => setSalary(Number(e.target.value))}
+          onChange={(e) => setSalary(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
         />
       </div>
